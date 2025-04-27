@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pink: #ff69b4; /* Hot Pink */
+  --dark-pink: #db7093; /* Pale Violet Red */
+  --light-pink: #fff0f5; /* Lavender Blush */
+  --gold: #ffd700; /* Gold (kept for accents) */
+  --dark: #5e3a4d; /* Dark Raspberry (replaces black) */
+  --light: #fff9fb; /* Almost White (pink tint) */
+  --accent: #ff1493; /* Deep Pink */
+  --text: #5e3a4d; /* Dark Raspberry for text */
+  --bg: #fff0f5; /* Light Pink background */
+  --container-bg: rgba(255, 240, 245, 0.95); /* Semi-transparent Lavender Blush */
+  --text-color: #5e3a4d; /* Dark text for readability */
+  --secondary: #db7093; /* Pale Violet Red for secondary elements */
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", serif;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .receipt-modal,
+  .receipt-modal * {
+    visibility: visible;
+  }
+
+  .receipt-modal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .receipt-modal button {
+    display: none;
+  }
+}
