@@ -2,12 +2,17 @@
 
 import { Clock, Truck } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "./language-context"
 
 interface MenuItem {
   name: string
+  nameEN: string
+  namePT: string
   emoji: string
   price: number
   description: string
+  descriptionEN: string
+  descriptionPT: string
   prepTime: number
 }
 
@@ -19,6 +24,8 @@ interface MenuSectionProps {
 }
 
 export default function MenuSection({ title, items, isActive, onAddToCart }: MenuSectionProps) {
+  const { language } = useLanguage()
+
   if (!isActive) return null
 
   return (
@@ -35,28 +42,36 @@ export default function MenuSection({ title, items, isActive, onAddToCart }: Men
           >
             <div className="flex items-center justify-between mb-2">
               <div className="font-display text-xl font-bold text-[#FFD700]">
-                {item.emoji} {item.name}
+                {item.emoji} {language === "PT" ? item.namePT : item.nameEN}
               </div>
               <div className="flex-1 border-b border-dotted border-[#FF1493] mx-4"></div>
               <div className="text-lg font-display text-[#FF1493] font-bold">{item.price} MZN</div>
             </div>
 
-            <div className="pl-4 border-l-2 border-[#DB7093] text-sm mb-3">{item.description}</div>
+            <div className="pl-4 border-l-2 border-[#DB7093] text-sm mb-3">
+              {language === "PT" ? item.descriptionPT : item.descriptionEN}
+            </div>
 
             <div className="flex items-center text-xs text-[#FFD700] italic mb-2">
               <Clock className="h-3 w-3 mr-1 text-[#FF1493]" />
-              Ready in {item.prepTime} min •
+              {language === "PT" ? "Pronto em " : "Ready in "} {item.prepTime} {language === "PT" ? "min •" : "min •"}
               <Truck className="h-3 w-3 mx-1 text-[#FF1493]" />
-              Delivery available
+              {language === "PT" ? "Entrega disponível" : "Delivery available"}
             </div>
 
             <Button
               variant="outline"
               size="sm"
               className="float-right border-2 border-[#FF1493] text-[#FF1493] hover:bg-[#DB7093] hover:text-white rounded-full"
-              onClick={() => onAddToCart({ name: item.name, price: item.price, emoji: item.emoji })}
+              onClick={() =>
+                onAddToCart({
+                  name: language === "PT" ? item.namePT : item.nameEN,
+                  price: item.price,
+                  emoji: item.emoji,
+                })
+              }
             >
-              Add to Order
+              {language === "PT" ? "Adicionar ao Pedido" : "Add to Order"}
             </Button>
             <div className="clear-both"></div>
           </div>

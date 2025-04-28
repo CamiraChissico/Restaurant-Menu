@@ -12,115 +12,226 @@ import PaymentSection from "@/components/payment-section"
 import ReceiptModal from "@/components/receipt-modal"
 import PaymentConfirmation from "@/components/payment-confirmation"
 import ContactSection from "@/components/contact-section"
+import TableAvailability from "@/components/table-availability"
+import ReservationConfirmation from "@/components/reservation-confirmation"
+import { LanguageProvider, useLanguage } from "@/components/language-context"
 
-// Menu data
+// Menu data with expanded items and translations
 const menuData = {
   starters: [
     {
-      name: "Camarão Alho",
+      nameEN: "Garlic Prawns",
+      namePT: "Camarão Alho",
       emoji: "🍤",
       price: 450,
-      description: "Succulent garlic prawns sautéed in olive oil, garlic, and chili flakes, served with crusty bread.",
+      descriptionEN:
+        "Succulent garlic prawns sautéed in olive oil, garlic, and chili flakes, served with crusty bread.",
+      descriptionPT: "Camarões suculentos salteados em azeite, alho e flocos de pimenta, servidos com pão crocante.",
       prepTime: 15,
     },
     {
-      name: "Avocado Bruschetta",
+      nameEN: "Avocado Bruschetta",
+      namePT: "Bruschetta de Abacate",
       emoji: "🥑",
       price: 350,
-      description: "Toasted bread topped with mashed avocado, cherry tomatoes, red onion, and balsamic glaze.",
+      descriptionEN: "Toasted bread topped with mashed avocado, cherry tomatoes, red onion, and balsamic glaze.",
+      descriptionPT: "Pão torrado coberto com abacate amassado, tomates cereja, cebola roxa e glacê balsâmico.",
       prepTime: 10,
     },
     {
-      name: "Mushroom Soup",
+      nameEN: "Mushroom Soup",
+      namePT: "Sopa de Cogumelos",
       emoji: "🍄",
       price: 300,
-      description: "Creamy wild mushroom soup with a touch of truffle oil and fresh herbs.",
+      descriptionEN: "Creamy wild mushroom soup with a touch of truffle oil and fresh herbs.",
+      descriptionPT: "Sopa cremosa de cogumelos silvestres com um toque de óleo de trufa e ervas frescas.",
       prepTime: 12,
+    },
+    {
+      nameEN: "Caprese Salad",
+      namePT: "Salada Caprese",
+      emoji: "🍅",
+      price: 320,
+      descriptionEN:
+        "Fresh mozzarella, tomatoes, and basil drizzled with balsamic reduction and extra virgin olive oil.",
+      descriptionPT: "Mozzarella fresca, tomates e manjericão regados com redução balsâmica e azeite extra virgem.",
+      prepTime: 8,
+    },
+    {
+      nameEN: "Seafood Ceviche",
+      namePT: "Ceviche de Frutos do Mar",
+      emoji: "🐟",
+      price: 480,
+      descriptionEN: "Fresh seafood marinated in citrus juices with red onion, cilantro, and avocado.",
+      descriptionPT: "Frutos do mar frescos marinados em sucos cítricos com cebola roxa, coentro e abacate.",
+      prepTime: 15,
     },
   ],
   mains: [
     {
-      name: "Frango à Cafreal",
-      emoji: "🥩",
+      nameEN: "Cafreal Chicken",
+      namePT: "Frango à Cafreal",
+      emoji: "🍗",
       price: 650,
-      description: "Spicy Goan-style chicken marinated in green masala, served with fries or rice.",
+      descriptionEN: "Spicy Goan-style chicken marinated in green masala, served with fries or rice.",
+      descriptionPT: "Frango picante ao estilo de Goa marinado em masala verde, servido com batatas fritas ou arroz.",
       prepTime: 25,
     },
     {
-      name: "Peixe Grelhado",
+      nameEN: "Grilled Fish",
+      namePT: "Peixe Grelhado",
       emoji: "🐟",
       price: 750,
-      description:
+      descriptionEN:
         "Fresh local fish grilled to perfection with lemon butter sauce, served with vegetables and mashed potatoes.",
+      descriptionPT:
+        "Peixe local fresco grelhado à perfeição com molho de manteiga e limão, servido com legumes e purê de batata.",
       prepTime: 20,
     },
     {
-      name: "Espaguete à Bolonhesa",
+      nameEN: "Spaghetti Bolognese",
+      namePT: "Espaguete à Bolonhesa",
       emoji: "🍝",
       price: 550,
-      description: "Classic spaghetti with rich beef bolognese sauce and parmesan cheese.",
+      descriptionEN: "Classic spaghetti with rich beef bolognese sauce and parmesan cheese.",
+      descriptionPT: "Espaguete clássico com molho bolonhesa de carne bovina e queijo parmesão.",
       prepTime: 18,
+    },
+    {
+      nameEN: "Grilled Lobster",
+      namePT: "Lagosta Grelhada",
+      emoji: "🦞",
+      price: 1200,
+      descriptionEN:
+        "Fresh local lobster grilled with garlic butter, served with saffron rice and seasonal vegetables.",
+      descriptionPT:
+        "Lagosta local fresca grelhada com manteiga de alho, servida com arroz de açafrão e legumes da estação.",
+      prepTime: 30,
+    },
+    {
+      nameEN: "Beef Tenderloin",
+      namePT: "Filé Mignon",
+      emoji: "🥩",
+      price: 950,
+      descriptionEN:
+        "Premium beef tenderloin cooked to your preference, served with red wine reduction and truffle mashed potatoes.",
+      descriptionPT:
+        "Filé mignon premium cozido à sua preferência, servido com redução de vinho tinto e purê de batata com trufa.",
+      prepTime: 25,
     },
   ],
   desserts: [
     {
-      name: "Chocolate Mousse",
+      nameEN: "Chocolate Mousse",
+      namePT: "Mousse de Chocolate",
       emoji: "🍫",
       price: 300,
-      description: "Rich dark chocolate mousse with whipped cream and fresh berries.",
+      descriptionEN: "Rich dark chocolate mousse with whipped cream and fresh berries.",
+      descriptionPT: "Mousse de chocolate amargo com chantilly e frutas vermelhas frescas.",
       prepTime: 5,
     },
     {
-      name: "Pudim de Leite",
+      nameEN: "Milk Pudding",
+      namePT: "Pudim de Leite",
       emoji: "🍮",
       price: 250,
-      description: "Traditional Mozambican milk pudding with caramel sauce.",
+      descriptionEN: "Traditional Mozambican milk pudding with caramel sauce.",
+      descriptionPT: "Pudim de leite tradicional moçambicano com calda de caramelo.",
       prepTime: 5,
     },
     {
-      name: "Ananás Assado",
+      nameEN: "Grilled Pineapple",
+      namePT: "Ananás Assado",
       emoji: "🍍",
       price: 280,
-      description: "Grilled pineapple with cinnamon and coconut ice cream.",
+      descriptionEN: "Grilled pineapple with cinnamon and coconut ice cream.",
+      descriptionPT: "Ananás grelhado com canela e sorvete de coco.",
       prepTime: 8,
+    },
+    {
+      nameEN: "Passion Fruit Cheesecake",
+      namePT: "Cheesecake de Maracujá",
+      emoji: "🍰",
+      price: 320,
+      descriptionEN: "Creamy cheesecake with tangy passion fruit topping and graham cracker crust.",
+      descriptionPT: "Cheesecake cremoso com cobertura de maracujá e base de biscoito graham.",
+      prepTime: 10,
+    },
+    {
+      nameEN: "Coconut Flan",
+      namePT: "Pudim de Coco",
+      emoji: "🥥",
+      price: 270,
+      descriptionEN: "Silky coconut flan with caramelized sugar and toasted coconut flakes.",
+      descriptionPT: "Pudim de coco sedoso com açúcar caramelizado e flocos de coco torrado.",
+      prepTime: 7,
     },
   ],
   drinks: [
     {
-      name: "Cocktails",
+      nameEN: "Cocktails",
+      namePT: "Coquetéis",
       emoji: "🍹",
       price: 400,
-      description: "Try our R&R Special (rum, raspberry, lime) or Tropical Sunset (vodka, mango, passionfruit).",
+      descriptionEN: "Try our R&R Special (rum, raspberry, lime) or Tropical Sunset (vodka, mango, passionfruit).",
+      descriptionPT:
+        "Experimente nosso Especial R&R (rum, framboesa, limão) ou Pôr do Sol Tropical (vodka, manga, maracujá).",
       prepTime: 7,
     },
     {
-      name: "Wine Selection",
+      nameEN: "Wine Selection",
+      namePT: "Seleção de Vinhos",
       emoji: "🍷",
       price: 500,
-      description: "Selection of South African and Portuguese wines by the glass or bottle.",
+      descriptionEN: "Selection of South African and Portuguese wines by the glass or bottle.",
+      descriptionPT: "Seleção de vinhos sul-africanos e portugueses em taça ou garrafa.",
       prepTime: 5,
     },
     {
-      name: "Non-Alcoholic",
-      emoji: "🍹",
+      nameEN: "Non-Alcoholic",
+      namePT: "Sem Álcool",
+      emoji: "🧃",
       price: 200,
-      description: "Fresh juices (mango, passionfruit, pineapple), iced teas, and artisanal sodas.",
+      descriptionEN: "Fresh juices (mango, passionfruit, pineapple), iced teas, and artisanal sodas.",
+      descriptionPT: "Sucos frescos (manga, maracujá, abacaxi), chás gelados e refrigerantes artesanais.",
       prepTime: 3,
+    },
+    {
+      nameEN: "Craft Beer Selection",
+      namePT: "Seleção de Cervejas Artesanais",
+      emoji: "🍺",
+      price: 350,
+      descriptionEN: "Local and imported craft beers, including IPA, stout, and wheat beer varieties.",
+      descriptionPT: "Cervejas artesanais locais e importadas, incluindo variedades de IPA, stout e cerveja de trigo.",
+      prepTime: 4,
+    },
+    {
+      nameEN: "Signature Mocktails",
+      namePT: "Mocktails Exclusivos",
+      emoji: "🥤",
+      price: 280,
+      descriptionEN: "Alcohol-free signature drinks like Coconut Dream and Berry Blast with fresh fruits and herbs.",
+      descriptionPT:
+        "Bebidas exclusivas sem álcool como Sonho de Coco e Explosão de Frutas Vermelhas com frutas e ervas frescas.",
+      prepTime: 6,
     },
   ],
 }
 
-export default function RestaurantMenu() {
+function RestaurantMenuContent() {
+  const { language, setLanguage, t } = useLanguage()
   const [activeSection, setActiveSection] = useState("starters")
   const [orderItems, setOrderItems] = useState<Array<{ name: string; price: number; emoji: string; quantity: number }>>(
     [],
   )
   const [isDarkMode, setIsDarkMode] = useState(false)
-  const [language, setLanguage] = useState("EN")
   const [showPaymentSection, setShowPaymentSection] = useState(false)
   const [showReceipt, setShowReceipt] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [orderId, setOrderId] = useState("")
+  const [selectedTable, setSelectedTable] = useState<string | null>(null)
+  const [showReservationConfirmation, setShowReservationConfirmation] = useState(false)
+  const [currentReservation, setCurrentReservation] = useState<any>(null)
   const { toast } = useToast()
 
   // Generate a random order ID
@@ -136,6 +247,65 @@ export default function RestaurantMenu() {
   // Toggle language
   const toggleLanguage = () => {
     setLanguage(language === "EN" ? "PT" : "EN")
+  }
+
+  // Handle table selection
+  const handleSelectTable = (tableId: string) => {
+    setSelectedTable(tableId)
+    toast({
+      title: language === "PT" ? "Mesa selecionada" : "Table selected",
+      description: language === "PT" ? `Você selecionou a mesa ${tableId}` : `You've selected table ${tableId}`,
+    })
+  }
+
+  // Handle table reservation
+  const handleReserveTable = (reservation: {
+    name: string
+    email: string
+    phone: string
+    date: Date
+    time: string
+    guests: number
+    tableId: string
+  }) => {
+    // Generate a confirmation code
+    const confirmationCode = `RES-${Math.floor(Math.random() * 10000)}`
+
+    // Show loading toast
+    toast({
+      title: language === "PT" ? "Processando reserva" : "Processing reservation",
+      description:
+        language === "PT"
+          ? "Por favor, aguarde enquanto processamos sua reserva..."
+          : "Please wait while we process your reservation...",
+    })
+
+    // Simulate reservation processing
+    setTimeout(() => {
+      const fullReservation = {
+        ...reservation,
+        confirmationCode,
+      }
+
+      setCurrentReservation(fullReservation)
+      setShowReservationConfirmation(true)
+
+      // Show success toast
+      toast({
+        title: language === "PT" ? "Reserva confirmada!" : "Reservation confirmed!",
+        description:
+          language === "PT"
+            ? `Sua mesa ${reservation.tableId} foi reservada para ${reservation.time} em ${reservation.date.toLocaleDateString()}.`
+            : `Your table ${reservation.tableId} has been reserved for ${reservation.time} on ${reservation.date.toLocaleDateString()}.`,
+        variant: "success",
+      })
+    }, 1500)
+  }
+
+  // Close reservation confirmation
+  const handleCloseReservationConfirmation = () => {
+    setShowReservationConfirmation(false)
+    setSelectedTable(null)
   }
 
   // Add item to cart
@@ -157,8 +327,11 @@ export default function RestaurantMenu() {
 
     // Show notification
     toast({
-      title: "Item added to cart",
-      description: `${item.emoji} ${item.name} has been added to your order.`,
+      title: language === "PT" ? "Item adicionado ao carrinho" : "Item added to cart",
+      description:
+        language === "PT"
+          ? `${item.emoji} ${item.name} foi adicionado ao seu pedido.`
+          : `${item.emoji} ${item.name} has been added to your order.`,
     })
   }
 
@@ -180,8 +353,11 @@ export default function RestaurantMenu() {
 
     // Show notification
     toast({
-      title: "Item removed from cart",
-      description: `${removedItem.emoji} ${removedItem.name} has been removed from your order.`,
+      title: language === "PT" ? "Item removido do carrinho" : "Item removed from cart",
+      description:
+        language === "PT"
+          ? `${removedItem.emoji} ${removedItem.name} foi removido do seu pedido.`
+          : `${removedItem.emoji} ${removedItem.name} has been removed from your order.`,
       variant: "destructive",
     })
   }
@@ -195,12 +371,28 @@ export default function RestaurantMenu() {
   const handleCheckout = () => {
     if (orderItems.length === 0) {
       toast({
-        title: "Empty cart",
-        description: "Please add items to your cart before checking out.",
+        title: language === "PT" ? "Carrinho vazio" : "Empty cart",
+        description:
+          language === "PT"
+            ? "Por favor, adicione itens ao seu carrinho antes de finalizar."
+            : "Please add items to your cart before checking out.",
         variant: "destructive",
       })
       return
     }
+
+    if (!selectedTable) {
+      toast({
+        title: language === "PT" ? "Nenhuma mesa selecionada" : "No table selected",
+        description:
+          language === "PT"
+            ? "Por favor, selecione uma mesa antes de finalizar."
+            : "Please select a table before checking out.",
+        variant: "destructive",
+      })
+      return
+    }
+
     setShowPaymentSection(true)
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
   }
@@ -209,8 +401,11 @@ export default function RestaurantMenu() {
   const handlePayment = (method: string) => {
     // Show loading toast
     toast({
-      title: "Processing payment",
-      description: "Please wait while we process your payment...",
+      title: language === "PT" ? "Processando pagamento" : "Processing payment",
+      description:
+        language === "PT"
+          ? "Por favor, aguarde enquanto processamos seu pagamento..."
+          : "Please wait while we process your payment...",
     })
 
     // Simulate payment processing
@@ -219,8 +414,11 @@ export default function RestaurantMenu() {
 
       // Show success toast
       toast({
-        title: "Payment successful!",
-        description: `Your order #${orderId} has been confirmed.`,
+        title: language === "PT" ? "Pagamento bem-sucedido!" : "Payment successful!",
+        description:
+          language === "PT"
+            ? `Seu pedido #${orderId} foi confirmado para a mesa ${selectedTable}.`
+            : `Your order #${orderId} has been confirmed for table ${selectedTable}.`,
         variant: "success",
       })
     }, 2000)
@@ -238,6 +436,7 @@ export default function RestaurantMenu() {
     setOrderItems([])
     setShowPaymentSection(false)
     setShowConfirmation(false)
+    setSelectedTable(null)
     // Generate new order ID for next order
     setOrderId(`LBC-${Math.floor(Math.random() * 10000)}`)
   }
@@ -250,7 +449,7 @@ export default function RestaurantMenu() {
       <div className="fixed top-4 right-4 z-50 flex flex-col md:flex-row gap-2">
         <Button variant="outline" size="sm" onClick={toggleTheme} className="rounded-full flex items-center gap-2">
           {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          {isDarkMode ? "Light" : "Dark"}
+          {isDarkMode ? t("lightMode") : t("darkMode")}
         </Button>
         <Button variant="outline" size="sm" onClick={toggleLanguage} className="rounded-full flex items-center gap-2">
           <Languages className="h-4 w-4" />
@@ -263,10 +462,8 @@ export default function RestaurantMenu() {
       >
         {/* Menu Header */}
         <div className="text-center py-8 px-4">
-          <h1 className="font-script text-4xl md:text-6xl font-bold text-[#FFD700] mb-2">La Belle Cuisine</h1>
-          <h2 className="font-display text-xl md:text-2xl text-[#FF1493] tracking-widest -mt-2">
-            FINE DINING EXPERIENCE
-          </h2>
+          <h1 className="font-script text-4xl md:text-6xl font-bold text-[#FFD700] mb-2">{t("restaurantName")}</h1>
+          <h2 className="font-display text-xl md:text-2xl text-[#FF1493] tracking-widest -mt-2">{t("tagline")}</h2>
 
           <div className="flex items-center justify-center my-6">
             <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#FF1493] to-transparent"></div>
@@ -274,7 +471,16 @@ export default function RestaurantMenu() {
             <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#FF1493] to-transparent"></div>
           </div>
 
-          <div className="italic text-[#FF1493]">Seasonal Menu • 2024 • Open 11AM-10PM</div>
+          <div className="italic text-[#FF1493]">{t("seasonalMenu")}</div>
+        </div>
+
+        {/* Table Availability Section */}
+        <div className="px-4 md:px-8">
+          <TableAvailability
+            onSelectTable={handleSelectTable}
+            selectedTable={selectedTable}
+            onReserveTable={handleReserveTable}
+          />
         </div>
 
         {/* Menu Navigation */}
@@ -284,28 +490,28 @@ export default function RestaurantMenu() {
             onClick={() => setActiveSection("starters")}
             className={`rounded-full ${activeSection === "starters" ? "bg-[#DB7093] hover:bg-[#DB7093]/90" : ""}`}
           >
-            🍤 Starters
+            🍤 {t("starters")}
           </Button>
           <Button
             variant={activeSection === "mains" ? "default" : "outline"}
             onClick={() => setActiveSection("mains")}
             className={`rounded-full ${activeSection === "mains" ? "bg-[#DB7093] hover:bg-[#DB7093]/90" : ""}`}
           >
-            🍲 Main Courses
+            🍲 {t("mains")}
           </Button>
           <Button
             variant={activeSection === "desserts" ? "default" : "outline"}
             onClick={() => setActiveSection("desserts")}
             className={`rounded-full ${activeSection === "desserts" ? "bg-[#DB7093] hover:bg-[#DB7093]/90" : ""}`}
           >
-            🍰 Desserts
+            🍰 {t("desserts")}
           </Button>
           <Button
             variant={activeSection === "drinks" ? "default" : "outline"}
             onClick={() => setActiveSection("drinks")}
             className={`rounded-full ${activeSection === "drinks" ? "bg-[#DB7093] hover:bg-[#DB7093]/90" : ""}`}
           >
-            🍹 Drinks
+            🍹 {t("drinks")}
           </Button>
         </div>
 
@@ -314,7 +520,7 @@ export default function RestaurantMenu() {
           {Object.keys(menuData).map((section) => (
             <MenuSection
               key={section}
-              title={section.charAt(0).toUpperCase() + section.slice(1)}
+              title={language === "PT" ? t(section) : section.charAt(0).toUpperCase() + section.slice(1)}
               items={menuData[section as keyof typeof menuData]}
               isActive={activeSection === section}
               onAddToCart={addToCart}
@@ -335,18 +541,40 @@ export default function RestaurantMenu() {
         onRemoveItem={removeFromCart}
         onCheckout={handleCheckout}
         total={calculateTotal()}
+        selectedTable={selectedTable}
       />
 
       {/* Payment Confirmation */}
-      {showConfirmation && <PaymentConfirmation orderId={orderId} onViewReceipt={viewReceipt} />}
+      {showConfirmation && (
+        <PaymentConfirmation orderId={orderId} onViewReceipt={viewReceipt} selectedTable={selectedTable} />
+      )}
 
       {/* Receipt Modal */}
       {showReceipt && (
-        <ReceiptModal orderId={orderId} items={orderItems} total={calculateTotal()} onClose={closeReceipt} />
+        <ReceiptModal
+          orderId={orderId}
+          items={orderItems}
+          total={calculateTotal()}
+          onClose={closeReceipt}
+          selectedTable={selectedTable}
+        />
+      )}
+
+      {/* Reservation Confirmation */}
+      {showReservationConfirmation && currentReservation && (
+        <ReservationConfirmation reservation={currentReservation} onClose={handleCloseReservationConfirmation} />
       )}
 
       {/* Toast notifications */}
       <Toaster />
     </div>
+  )
+}
+
+export default function RestaurantMenu() {
+  return (
+    <LanguageProvider>
+      <RestaurantMenuContent />
+    </LanguageProvider>
   )
 }
