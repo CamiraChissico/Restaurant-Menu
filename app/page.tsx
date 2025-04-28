@@ -36,7 +36,7 @@ const menuData = {
       price: 350,
       descriptionEN: "Toasted bread topped with mashed avocado, cherry tomatoes, red onion, and balsamic glaze.",
       descriptionPT: "Pão torrado coberto com abacate amassado, tomates cereja, cebola roxa e glacê balsâmico.",
-      prepTime: 10,
+      prepTime: 15,
     },
     {
       nameEN: "Mushroom Soup",
@@ -45,7 +45,7 @@ const menuData = {
       price: 300,
       descriptionEN: "Creamy wild mushroom soup with a touch of truffle oil and fresh herbs.",
       descriptionPT: "Sopa cremosa de cogumelos silvestres com um toque de óleo de trufa e ervas frescas.",
-      prepTime: 12,
+      prepTime: 15,
     },
     {
       nameEN: "Caprese Salad",
@@ -55,7 +55,7 @@ const menuData = {
       descriptionEN:
         "Fresh mozzarella, tomatoes, and basil drizzled with balsamic reduction and extra virgin olive oil.",
       descriptionPT: "Mozzarella fresca, tomates e manjericão regados com redução balsâmica e azeite extra virgem.",
-      prepTime: 8,
+      prepTime: 15,
     },
     {
       nameEN: "Seafood Ceviche",
@@ -75,7 +75,7 @@ const menuData = {
       price: 650,
       descriptionEN: "Spicy Goan-style chicken marinated in green masala, served with fries or rice.",
       descriptionPT: "Frango picante ao estilo de Goa marinado em masala verde, servido com batatas fritas ou arroz.",
-      prepTime: 25,
+      prepTime: 15,
     },
     {
       nameEN: "Grilled Fish",
@@ -86,7 +86,7 @@ const menuData = {
         "Fresh local fish grilled to perfection with lemon butter sauce, served with vegetables and mashed potatoes.",
       descriptionPT:
         "Peixe local fresco grelhado à perfeição com molho de manteiga e limão, servido com legumes e purê de batata.",
-      prepTime: 20,
+      prepTime: 15,
     },
     {
       nameEN: "Spaghetti Bolognese",
@@ -95,7 +95,7 @@ const menuData = {
       price: 550,
       descriptionEN: "Classic spaghetti with rich beef bolognese sauce and parmesan cheese.",
       descriptionPT: "Espaguete clássico com molho bolonhesa de carne bovina e queijo parmesão.",
-      prepTime: 18,
+      prepTime: 15,
     },
     {
       nameEN: "Grilled Lobster",
@@ -106,7 +106,7 @@ const menuData = {
         "Fresh local lobster grilled with garlic butter, served with saffron rice and seasonal vegetables.",
       descriptionPT:
         "Lagosta local fresca grelhada com manteiga de alho, servida com arroz de açafrão e legumes da estação.",
-      prepTime: 30,
+      prepTime: 15,
     },
     {
       nameEN: "Beef Tenderloin",
@@ -117,7 +117,7 @@ const menuData = {
         "Premium beef tenderloin cooked to your preference, served with red wine reduction and truffle mashed potatoes.",
       descriptionPT:
         "Filé mignon premium cozido à sua preferência, servido com redução de vinho tinto e purê de batata com trufa.",
-      prepTime: 25,
+      prepTime: 15,
     },
   ],
   desserts: [
@@ -128,7 +128,7 @@ const menuData = {
       price: 300,
       descriptionEN: "Rich dark chocolate mousse with whipped cream and fresh berries.",
       descriptionPT: "Mousse de chocolate amargo com chantilly e frutas vermelhas frescas.",
-      prepTime: 5,
+      prepTime: 15,
     },
     {
       nameEN: "Milk Pudding",
@@ -137,7 +137,7 @@ const menuData = {
       price: 250,
       descriptionEN: "Traditional Mozambican milk pudding with caramel sauce.",
       descriptionPT: "Pudim de leite tradicional moçambicano com calda de caramelo.",
-      prepTime: 5,
+      prepTime: 15,
     },
     {
       nameEN: "Grilled Pineapple",
@@ -146,7 +146,7 @@ const menuData = {
       price: 280,
       descriptionEN: "Grilled pineapple with cinnamon and coconut ice cream.",
       descriptionPT: "Ananás grelhado com canela e sorvete de coco.",
-      prepTime: 8,
+      prepTime: 15,
     },
     {
       nameEN: "Passion Fruit Cheesecake",
@@ -155,7 +155,7 @@ const menuData = {
       price: 320,
       descriptionEN: "Creamy cheesecake with tangy passion fruit topping and graham cracker crust.",
       descriptionPT: "Cheesecake cremoso com cobertura de maracujá e base de biscoito graham.",
-      prepTime: 10,
+      prepTime: 15,
     },
     {
       nameEN: "Coconut Flan",
@@ -164,7 +164,7 @@ const menuData = {
       price: 270,
       descriptionEN: "Silky coconut flan with caramelized sugar and toasted coconut flakes.",
       descriptionPT: "Pudim de coco sedoso com açúcar caramelizado e flocos de coco torrado.",
-      prepTime: 7,
+      prepTime: 15,
     },
   ],
   drinks: [
@@ -176,7 +176,7 @@ const menuData = {
       descriptionEN: "Try our R&R Special (rum, raspberry, lime) or Tropical Sunset (vodka, mango, passionfruit).",
       descriptionPT:
         "Experimente nosso Especial R&R (rum, framboesa, limão) ou Pôr do Sol Tropical (vodka, manga, maracujá).",
-      prepTime: 7,
+      prepTime: 15,
     },
     {
       nameEN: "Wine Selection",
@@ -185,7 +185,7 @@ const menuData = {
       price: 500,
       descriptionEN: "Selection of South African and Portuguese wines by the glass or bottle.",
       descriptionPT: "Seleção de vinhos sul-africanos e portugueses em taça ou garrafa.",
-      prepTime: 5,
+      prepTime: 15,
     },
     {
       nameEN: "Non-Alcoholic",
@@ -194,7 +194,7 @@ const menuData = {
       price: 200,
       descriptionEN: "Fresh juices (mango, passionfruit, pineapple), iced teas, and artisanal sodas.",
       descriptionPT: "Sucos frescos (manga, maracujá, abacaxi), chás gelados e refrigerantes artesanais.",
-      prepTime: 3,
+      prepTime: 15,
     },
     {
       nameEN: "Craft Beer Selection",
@@ -203,7 +203,7 @@ const menuData = {
       price: 350,
       descriptionEN: "Local and imported craft beers, including IPA, stout, and wheat beer varieties.",
       descriptionPT: "Cervejas artesanais locais e importadas, incluindo variedades de IPA, stout e cerveja de trigo.",
-      prepTime: 4,
+      prepTime: 15,
     },
     {
       nameEN: "Signature Mocktails",
@@ -213,7 +213,7 @@ const menuData = {
       descriptionEN: "Alcohol-free signature drinks like Coconut Dream and Berry Blast with fresh fruits and herbs.",
       descriptionPT:
         "Bebidas exclusivas sem álcool como Sonho de Coco e Explosão de Frutas Vermelhas com frutas e ervas frescas.",
-      prepTime: 6,
+      prepTime: 15,
     },
   ],
 }

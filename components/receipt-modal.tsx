@@ -28,7 +28,7 @@ export default function ReceiptModal({ orderId, items, total, onClose, selectedT
 
   // Calculate subtotal, tax, and delivery fee
   const subtotal = total
-  const tax = Math.round(subtotal * 0.17) // 17% VAT
+  const tax = 20 // Flat rate of 20 meticais
   const deliveryFee = selectedTable ? 0 : 100 // No delivery fee if dining in
   const grandTotal = subtotal + tax + deliveryFee
 
@@ -102,7 +102,7 @@ export default function ReceiptModal({ orderId, items, total, onClose, selectedT
               <span>{subtotal} MZN</span>
             </div>
             <div className="flex justify-between">
-              <span>{t("vat")}:</span>
+              <span>{language === "PT" ? "Taxa (20 MZN)" : "Tax (20 MZN)"}:</span>
               <span>{tax} MZN</span>
             </div>
             {!selectedTable && (

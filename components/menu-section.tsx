@@ -54,7 +54,7 @@ export default function MenuSection({ title, items, isActive, onAddToCart }: Men
 
             <div className="flex items-center text-xs text-[#FFD700] italic mb-2">
               <Clock className="h-3 w-3 mr-1 text-[#FF1493]" />
-              {language === "PT" ? "Pronto em " : "Ready in "} {item.prepTime} {language === "PT" ? "min •" : "min •"}
+              {language === "PT" ? "Pronto em 15 min •" : "Ready in 15 min •"}
               <Truck className="h-3 w-3 mx-1 text-[#FF1493]" />
               {language === "PT" ? "Entrega disponível" : "Delivery available"}
             </div>
