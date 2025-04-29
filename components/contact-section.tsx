@@ -14,15 +14,18 @@ export default function ContactSection() {
     subject: string
     message: string
   }) => {
-    // Show a success message but don't actually send the data
+    // Simulate sending email
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+
+    // Show success toast
     toast({
       title: t("messageSent"),
       description: t("thankYouMessage"),
       variant: "success",
     })
 
-    // Log the data that would have been sent
-    console.log("Contact form data (not sent):", data)
+    // In a real application, you would send this data to your server
+    console.log("Contact form data:", data)
   }
 
   return (
@@ -44,7 +47,10 @@ export default function ContactSection() {
           <p className="mb-6">{t("contactFormDescription")}</p>
 
           <div className="flex flex-col gap-4">
-            <div className="flex items-center p-6 border-2 border-[#FF1493] rounded-xl">
+            <a
+              href="tel:+258842094211"
+              className="flex items-center p-6 border-2 border-[#FF1493] rounded-xl transition-all hover:-translate-y-2 hover:shadow-lg"
+            >
               <div className="w-12 h-12 rounded-full bg-[rgba(141,110,99,0.2)] flex items-center justify-center mr-4 text-[#FF1493]">
                 <Phone className="h-5 w-5" />
               </div>
@@ -52,9 +58,12 @@ export default function ContactSection() {
                 <div className="font-semibold text-[#FFD700]">{t("callUs")}</div>
                 <div className="text-sm">+258 84 209 4211</div>
               </div>
-            </div>
+            </a>
 
-            <div className="flex items-center p-6 border-2 border-[#FF1493] rounded-xl">
+            <a
+              href="mailto:chissicocamira1@gmail.com"
+              className="flex items-center p-6 border-2 border-[#FF1493] rounded-xl transition-all hover:-translate-y-2 hover:shadow-lg"
+            >
               <div className="w-12 h-12 rounded-full bg-[rgba(141,110,99,0.2)] flex items-center justify-center mr-4 text-[#FF1493]">
                 <Mail className="h-5 w-5" />
               </div>
@@ -62,7 +71,7 @@ export default function ContactSection() {
                 <div className="font-semibold text-[#FFD700]">{t("emailUs")}</div>
                 <div className="text-sm">chissicocamira1@gmail.com</div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
 
