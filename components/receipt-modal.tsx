@@ -26,11 +26,10 @@ export default function ReceiptModal({ orderId, items, total, onClose, selectedT
   const formattedDate = format(currentDate, "dd/MM/yyyy")
   const formattedTime = format(currentDate, "HH:mm:ss")
 
-  // Calculate subtotal, tax, and delivery fee
+  // Calculate subtotal and delivery fee (no tax)
   const subtotal = total
-  const tax = 20 // Flat rate of 20 meticais
   const deliveryFee = selectedTable ? 0 : 100 // No delivery fee if dining in
-  const grandTotal = subtotal + tax + deliveryFee
+  const grandTotal = subtotal + deliveryFee // No tax added
 
   // Function to print receipt
   const printReceipt = () => {
@@ -100,10 +99,6 @@ export default function ReceiptModal({ orderId, items, total, onClose, selectedT
             <div className="flex justify-between">
               <span>{t("subtotal")}:</span>
               <span>{subtotal} MZN</span>
-            </div>
-            <div className="flex justify-between">
-              <span>{language === "PT" ? "Taxa (20 MZN)" : "Tax (20 MZN)"}:</span>
-              <span>{tax} MZN</span>
             </div>
             {!selectedTable && (
               <div className="flex justify-between">

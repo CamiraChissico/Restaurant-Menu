@@ -13,7 +13,7 @@ interface PaymentSectionProps {
 }
 
 export default function PaymentSection({ onPayment, total }: PaymentSectionProps) {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   const [activeMethod, setActiveMethod] = useState("card")
 
   return (
@@ -96,6 +96,10 @@ export default function PaymentSection({ onPayment, total }: PaymentSectionProps
       {activeMethod === "mpesa" && (
         <div className="text-center space-y-4">
           <p>{t("mpesaPrompt")}</p>
+          <div className="bg-[rgba(255,20,147,0.1)] p-4 rounded-lg border border-[#FF1493] mb-4">
+            <p className="font-bold">{t("transferNumber")}</p>
+            <p className="text-lg">+258 86 323 9800</p>
+          </div>
           <Button
             className="w-full bg-gradient-to-r from-[#FF1493] to-[#DB7093] hover:from-[#DB7093] hover:to-[#FF1493] text-white rounded-full"
             onClick={() => onPayment("mpesa")}
@@ -108,6 +112,10 @@ export default function PaymentSection({ onPayment, total }: PaymentSectionProps
       {activeMethod === "emola" && (
         <div className="text-center space-y-4">
           <p>{t("emolaRedirect")}</p>
+          <div className="bg-[rgba(255,20,147,0.1)] p-4 rounded-lg border border-[#FF1493] mb-4">
+            <p className="font-bold">{t("transferNumber")}</p>
+            <p className="text-lg">+258 86 323 9800</p>
+          </div>
           <Button
             className="w-full bg-gradient-to-r from-[#FF1493] to-[#DB7093] hover:from-[#DB7093] hover:to-[#FF1493] text-white rounded-full"
             onClick={() => onPayment("emola")}

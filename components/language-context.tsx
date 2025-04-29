@@ -78,6 +78,7 @@ export const translations = {
     with: "with",
     mpesaPrompt: "You will receive an Mpesa prompt on your phone to complete payment.",
     emolaRedirect: "You will be redirected to Emola to complete your payment.",
+    transferNumber: "Transfer to number:",
 
     // Payment confirmation
     paymentSuccessful: "Payment Successful!",
@@ -92,7 +93,6 @@ export const translations = {
     order: "Order #",
     orderDetails: "ORDER DETAILS",
     subtotal: "Subtotal",
-    vat: "VAT (17%)",
     deliveryFee: "Delivery Fee",
     print: "Print",
     save: "Save",
@@ -103,6 +103,15 @@ export const translations = {
     hearFromYou: "We'd love to hear from you! ✨",
     callUs: "Call Us",
     emailUs: "Email Us",
+    subject: "Subject",
+    message: "Message",
+    sendMessage: "Send Message",
+    sending: "Sending...",
+    messageSent: "Message Sent!",
+    thankYouMessage: "Thank you for your message. We'll get back to you as soon as possible.",
+    sendAnother: "Send Another Message",
+    getInTouch: "Get in Touch",
+    contactFormDescription: "Have questions or feedback? Fill out the form below and we'll get back to you shortly.",
 
     // Food descriptions
     // Will be added directly in the menu data
@@ -179,6 +188,7 @@ export const translations = {
     with: "com",
     mpesaPrompt: "Você receberá uma solicitação Mpesa no seu telefone para concluir o pagamento.",
     emolaRedirect: "Você será redirecionado para o Emola para concluir seu pagamento.",
+    transferNumber: "Número para transferência:",
 
     // Payment confirmation
     paymentSuccessful: "Pagamento Bem-sucedido!",
@@ -193,7 +203,6 @@ export const translations = {
     order: "Pedido #",
     orderDetails: "DETALHES DO PEDIDO",
     subtotal: "Subtotal",
-    vat: "IVA (17%)",
     deliveryFee: "Taxa de Entrega",
     print: "Imprimir",
     save: "Salvar",
@@ -204,6 +213,15 @@ export const translations = {
     hearFromYou: "Adoraríamos ouvir de você! ✨",
     callUs: "Ligue para Nós",
     emailUs: "Envie-nos um Email",
+    subject: "Assunto",
+    message: "Mensagem",
+    sendMessage: "Enviar Mensagem",
+    sending: "Enviando...",
+    messageSent: "Mensagem Enviada!",
+    thankYouMessage: "Obrigado pela sua mensagem. Entraremos em contato o mais breve possível.",
+    sendAnother: "Enviar Outra Mensagem",
+    getInTouch: "Entre em Contato",
+    contactFormDescription: "Tem perguntas ou feedback? Preencha o formulário abaixo e entraremos em contato em breve.",
 
     // Food descriptions
     // Will be added directly in the menu data
