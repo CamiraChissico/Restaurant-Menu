@@ -16,13 +16,38 @@ import TableAvailability from "@/components/table-availability"
 import ReservationConfirmation from "@/components/reservation-confirmation"
 import { LanguageProvider, useLanguage } from "@/components/language-context"
 
-// Menu data with expanded items and translations
+// Menu data with real images
 const menuData = {
   starters: [
+    {
+      nameEN: "Matapa with Shrimp",
+      namePT: "Matapa com Camarão",
+      emoji: "🥬",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-KkCIu0Rl5UT9357uD8VkHOQUZo7AK0.png",
+      price: 420,
+      descriptionEN:
+        "Traditional Mozambican dish made with cassava leaves, coconut milk, and peanuts, served with rice and topped with sautéed shrimp.",
+      descriptionPT:
+        "Prato tradicional moçambicano feito com folhas de mandioca, leite de coco e amendoim, servido com arroz e coberto com camarão salteado.",
+      prepTime: 25,
+    },
+    {
+      nameEN: "Peri-Peri Chicken Livers",
+      namePT: "Fígados de Frango Peri-Peri",
+      emoji: "🍗",
+      image: "https://images.unsplash.com/photo-1600891964599-f61f4298bdbc?q=80&w=1000&auto=format&fit=crop",
+      price: 380,
+      descriptionEN:
+        "Spicy chicken livers cooked in a traditional Mozambican peri-peri sauce, served with crusty bread.",
+      descriptionPT:
+        "Fígados de frango picantes cozidos em molho peri-peri tradicional moçambicano, servidos com pão crocante.",
+      prepTime: 15,
+    },
     {
       nameEN: "Garlic Prawns",
       namePT: "Camarão Alho",
       emoji: "🍤",
+      image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=1000&auto=format&fit=crop",
       price: 450,
       descriptionEN:
         "Succulent garlic prawns sautéed in olive oil, garlic, and chili flakes, served with crusty bread.",
@@ -33,6 +58,7 @@ const menuData = {
       nameEN: "Avocado Bruschetta",
       namePT: "Bruschetta de Abacate",
       emoji: "🥑",
+      image: "https://images.unsplash.com/photo-1588137378633-dea1336ce1e2?q=80&w=1000&auto=format&fit=crop",
       price: 350,
       descriptionEN: "Toasted bread topped with mashed avocado, cherry tomatoes, red onion, and balsamic glaze.",
       descriptionPT: "Pão torrado coberto com abacate amassado, tomates cereja, cebola roxa e glacê balsâmico.",
@@ -42,6 +68,7 @@ const menuData = {
       nameEN: "Mushroom Soup",
       namePT: "Sopa de Cogumelos",
       emoji: "🍄",
+      image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=1000&auto=format&fit=crop",
       price: 300,
       descriptionEN: "Creamy wild mushroom soup with a touch of truffle oil and fresh herbs.",
       descriptionPT: "Sopa cremosa de cogumelos silvestres com um toque de óleo de trufa e ervas frescas.",
@@ -51,6 +78,7 @@ const menuData = {
       nameEN: "Caprese Salad",
       namePT: "Salada Caprese",
       emoji: "🍅",
+      image: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?q=80&w=1000&auto=format&fit=crop",
       price: 320,
       descriptionEN:
         "Fresh mozzarella, tomatoes, and basil drizzled with balsamic reduction and extra virgin olive oil.",
@@ -61,6 +89,7 @@ const menuData = {
       nameEN: "Seafood Ceviche",
       namePT: "Ceviche de Frutos do Mar",
       emoji: "🐟",
+      image: "https://images.unsplash.com/photo-1632789395770-20e6f63be806?q=80&w=1000&auto=format&fit=crop",
       price: 480,
       descriptionEN: "Fresh seafood marinated in citrus juices with red onion, cilantro, and avocado.",
       descriptionPT: "Frutos do mar frescos marinados em sucos cítricos com cebola roxa, coentro e abacate.",
@@ -69,9 +98,22 @@ const menuData = {
   ],
   mains: [
     {
+      nameEN: "Piri Piri Chicken",
+      namePT: "Frango Piri Piri",
+      emoji: "🍗",
+      image: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?q=80&w=1000&auto=format&fit=crop",
+      price: 580,
+      descriptionEN:
+        "Flame-grilled chicken marinated in authentic Mozambican piri piri sauce, served with fries and salad.",
+      descriptionPT:
+        "Frango grelhado marinado em autêntico molho piri piri moçambicano, servido com batatas fritas e salada.",
+      prepTime: 25,
+    },
+    {
       nameEN: "Cafreal Chicken",
       namePT: "Frango à Cafreal",
       emoji: "🍗",
+      image: "https://images.unsplash.com/photo-1610057099431-d73a1c9d2f2f?q=80&w=1000&auto=format&fit=crop",
       price: 650,
       descriptionEN: "Spicy Goan-style chicken marinated in green masala, served with fries or rice.",
       descriptionPT: "Frango picante ao estilo de Goa marinado em masala verde, servido com batatas fritas ou arroz.",
@@ -81,6 +123,7 @@ const menuData = {
       nameEN: "Grilled Fish",
       namePT: "Peixe Grelhado",
       emoji: "🐟",
+      image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1000&auto=format&fit=crop",
       price: 750,
       descriptionEN:
         "Fresh local fish grilled to perfection with lemon butter sauce, served with vegetables and mashed potatoes.",
@@ -92,6 +135,7 @@ const menuData = {
       nameEN: "Spaghetti Bolognese",
       namePT: "Espaguete à Bolonhesa",
       emoji: "🍝",
+      image: "https://images.unsplash.com/photo-1622973536968-3ead9e780960?q=80&w=1000&auto=format&fit=crop",
       price: 550,
       descriptionEN: "Classic spaghetti with rich beef bolognese sauce and parmesan cheese.",
       descriptionPT: "Espaguete clássico com molho bolonhesa de carne bovina e queijo parmesão.",
@@ -101,6 +145,7 @@ const menuData = {
       nameEN: "Grilled Lobster",
       namePT: "Lagosta Grelhada",
       emoji: "🦞",
+      image: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?q=80&w=1000&auto=format&fit=crop",
       price: 1200,
       descriptionEN:
         "Fresh local lobster grilled with garlic butter, served with saffron rice and seasonal vegetables.",
@@ -112,6 +157,7 @@ const menuData = {
       nameEN: "Beef Tenderloin",
       namePT: "Filé Mignon",
       emoji: "🥩",
+      image: "https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1000&auto=format&fit=crop",
       price: 950,
       descriptionEN:
         "Premium beef tenderloin cooked to your preference, served with red wine reduction and truffle mashed potatoes.",
@@ -125,6 +171,7 @@ const menuData = {
       nameEN: "Chocolate Mousse",
       namePT: "Mousse de Chocolate",
       emoji: "🍫",
+      image: "https://images.unsplash.com/photo-1511715282680-fbf93a50e721?q=80&w=1000&auto=format&fit=crop",
       price: 300,
       descriptionEN: "Rich dark chocolate mousse with whipped cream and fresh berries.",
       descriptionPT: "Mousse de chocolate amargo com chantilly e frutas vermelhas frescas.",
@@ -134,6 +181,7 @@ const menuData = {
       nameEN: "Milk Pudding",
       namePT: "Pudim de Leite",
       emoji: "🍮",
+      image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=1000&auto=format&fit=crop",
       price: 250,
       descriptionEN: "Traditional Mozambican milk pudding with caramel sauce.",
       descriptionPT: "Pudim de leite tradicional moçambicano com calda de caramelo.",
@@ -143,6 +191,7 @@ const menuData = {
       nameEN: "Grilled Pineapple",
       namePT: "Ananás Assado",
       emoji: "🍍",
+      image: "https://images.unsplash.com/photo-1625943553852-781c6dd46faa?q=80&w=1000&auto=format&fit=crop",
       price: 280,
       descriptionEN: "Grilled pineapple with cinnamon and coconut ice cream.",
       descriptionPT: "Ananás grelhado com canela e sorvete de coco.",
@@ -152,6 +201,7 @@ const menuData = {
       nameEN: "Passion Fruit Cheesecake",
       namePT: "Cheesecake de Maracujá",
       emoji: "🍰",
+      image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=1000&auto=format&fit=crop",
       price: 320,
       descriptionEN: "Creamy cheesecake with tangy passion fruit topping and graham cracker crust.",
       descriptionPT: "Cheesecake cremoso com cobertura de maracujá e base de biscoito graham.",
@@ -161,6 +211,7 @@ const menuData = {
       nameEN: "Coconut Flan",
       namePT: "Pudim de Coco",
       emoji: "🥥",
+      image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1000&auto=format&fit=crop",
       price: 270,
       descriptionEN: "Silky coconut flan with caramelized sugar and toasted coconut flakes.",
       descriptionPT: "Pudim de coco sedoso com açúcar caramelizado e flocos de coco torrado.",
@@ -169,9 +220,20 @@ const menuData = {
   ],
   drinks: [
     {
+      nameEN: "Coconut Water",
+      namePT: "Água de Coco",
+      emoji: "🥥",
+      image: "https://images.unsplash.com/photo-1536057222397-b596ae6c5bcf?q=80&w=1000&auto=format&fit=crop",
+      price: 180,
+      descriptionEN: "Fresh coconut water served in the shell, perfect for a refreshing tropical experience.",
+      descriptionPT: "Água de coco fresca servida na casca, perfeita para uma experiência tropical refrescante.",
+      prepTime: 5,
+    },
+    {
       nameEN: "Cocktails",
       namePT: "Coquetéis",
       emoji: "🍹",
+      image: "https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=1000&auto=format&fit=crop",
       price: 400,
       descriptionEN: "Try our R&R Special (rum, raspberry, lime) or Tropical Sunset (vodka, mango, passionfruit).",
       descriptionPT:
@@ -182,6 +244,7 @@ const menuData = {
       nameEN: "Wine Selection",
       namePT: "Seleção de Vinhos",
       emoji: "🍷",
+      image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000&auto=format&fit=crop",
       price: 500,
       descriptionEN: "Selection of South African and Portuguese wines by the glass or bottle.",
       descriptionPT: "Seleção de vinhos sul-africanos e portugueses em taça ou garrafa.",
@@ -191,6 +254,7 @@ const menuData = {
       nameEN: "Non-Alcoholic",
       namePT: "Sem Álcool",
       emoji: "🧃",
+      image: "https://images.unsplash.com/photo-1621263764928-df1444c5e859?q=80&w=1000&auto=format&fit=crop",
       price: 200,
       descriptionEN: "Fresh juices (mango, passionfruit, pineapple), iced teas, and artisanal sodas.",
       descriptionPT: "Sucos frescos (manga, maracujá, abacaxi), chás gelados e refrigerantes artesanais.",
@@ -200,6 +264,7 @@ const menuData = {
       nameEN: "Craft Beer Selection",
       namePT: "Seleção de Cervejas Artesanais",
       emoji: "🍺",
+      image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?q=80&w=1000&auto=format&fit=crop",
       price: 350,
       descriptionEN: "Local and imported craft beers, including IPA, stout, and wheat beer varieties.",
       descriptionPT: "Cervejas artesanais locais e importadas, incluindo variedades de IPA, stout e cerveja de trigo.",
@@ -209,6 +274,7 @@ const menuData = {
       nameEN: "Signature Mocktails",
       namePT: "Mocktails Exclusivos",
       emoji: "🥤",
+      image: "https://images.unsplash.com/photo-1604404895906-1cba0f221e14?q=80&w=1000&auto=format&fit=crop",
       price: 280,
       descriptionEN: "Alcohol-free signature drinks like Coconut Dream and Berry Blast with fresh fruits and herbs.",
       descriptionPT:

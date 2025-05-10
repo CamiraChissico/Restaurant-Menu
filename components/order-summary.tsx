@@ -51,8 +51,8 @@ export default function OrderSummary({ items, onRemoveItem, onCheckout, total, s
               >
                 <div className="flex-1">
                   <div className="flex items-center">
-                    <span>{item.emoji}</span>
-                    <span className="ml-1">{item.name}</span>
+                    <span className="mr-1">{item.emoji}</span>
+                    <span>{item.name}</span>
                   </div>
                   <div className="text-xs opacity-70">
                     {item.quantity} × {item.price} MZN
