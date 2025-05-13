@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Moon, Sun, Languages } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -8,9 +9,6 @@ import { useToast } from "@/components/ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import MenuSection from "@/components/menu-section"
 import OrderSummary from "@/components/order-summary"
-import PaymentSection from "@/components/payment-section"
-import ReceiptModal from "@/components/receipt-modal"
-import PaymentConfirmation from "@/components/payment-confirmation"
 import ContactSection from "@/components/contact-section"
 import TableAvailability from "@/components/table-availability"
 import ReservationConfirmation from "@/components/reservation-confirmation"
@@ -286,15 +284,13 @@ const menuData = {
 }
 
 function RestaurantMenuContent() {
+  const router = useRouter()
   const { language, setLanguage, t } = useLanguage()
   const [activeSection, setActiveSection] = useState("starters")
   const [orderItems, setOrderItems] = useState<Array<{ name: string; price: number; emoji: string; quantity: number }>>(
     [],
   )
   const [isDarkMode, setIsDarkMode] = useState(false)
-  const [showPaymentSection, setShowPaymentSection] = useState(false)
-  const [showReceipt, setShowReceipt] = useState(false)
-  const [showConfirmation, setShowConfirmation] = useState(false)
   const [orderId, setOrderId] = useState("")
   const [selectedTable, setSelectedTable] = useState<string | null>(null)
   const [showReservationConfirmation, setShowReservationConfirmation] = useState(false)
@@ -434,7 +430,7 @@ function RestaurantMenuContent() {
     return orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
   }
 
-  // Handle checkout
+  // Handle checkout - now redirects to payment page
   const handleCheckout = () => {
     if (orderItems.length === 0) {
       toast({
@@ -460,53 +456,26 @@ function RestaurantMenuContent() {
       return
     }
 
-    setShowPaymentSection(true)
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+    // Prepare order data for URL parameters
+    const encodedItems = encodeURIComponent(JSON.stringify(orderItems))
+    const total = calculateTotal()
+
+    // Redirect to payment page with order data
+    router.push(`/payment?orderId=${orderId}&table=${selectedTable}&total=${total}&items=${encodedItems}`)
   }
 
-  // Handle payment
-  const handlePayment = (method: string) => {
-    // Show loading toast
-    toast({
-      title: language === "PT" ? "Processando pagamento" : "Processing payment",
-      description:
-        language === "PT"
-          ? "Por favor, aguarde enquanto processamos seu pagamento..."
-          : "Please wait while we process your payment...",
-    })
+  // Add this useEffect to scroll to the table availability section when the page loads
+  useEffect(() => {
+    // Add a small delay to ensure the page is fully loaded
+    const timer = setTimeout(() => {
+      const tableSection = document.getElementById("table-availability-section")
+      if (tableSection) {
+        tableSection.scrollIntoView({ behavior: "smooth", block: "center" })
+      }
+    }, 1000)
 
-    // Simulate payment processing
-    setTimeout(() => {
-      setShowConfirmation(true)
-
-      // Show success toast
-      toast({
-        title: language === "PT" ? "Pagamento bem-sucedido!" : "Payment successful!",
-        description:
-          language === "PT"
-            ? `Seu pedido #${orderId} foi confirmado para a mesa ${selectedTable}.`
-            : `Your order #${orderId} has been confirmed for table ${selectedTable}.`,
-        variant: "success",
-      })
-    }, 2000)
-  }
-
-  // View receipt
-  const viewReceipt = () => {
-    setShowReceipt(true)
-  }
-
-  // Close receipt
-  const closeReceipt = () => {
-    setShowReceipt(false)
-    // Reset cart and payment section after viewing receipt
-    setOrderItems([])
-    setShowPaymentSection(false)
-    setShowConfirmation(false)
-    setSelectedTable(null)
-    // Generate new order ID for next order
-    setOrderId(`LBC-${Math.floor(Math.random() * 10000)}`)
-  }
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <div
@@ -542,7 +511,7 @@ function RestaurantMenuContent() {
         </div>
 
         {/* Table Availability Section */}
-        <div className="px-4 md:px-8">
+        <div id="table-availability-section" className="px-4 md:px-8">
           <TableAvailability
             onSelectTable={handleSelectTable}
             selectedTable={selectedTable}
@@ -595,9 +564,6 @@ function RestaurantMenuContent() {
           ))}
         </div>
 
-        {/* Payment Section */}
-        {showPaymentSection && <PaymentSection onPayment={handlePayment} total={calculateTotal()} />}
-
         {/* Contact Section */}
         <ContactSection />
       </Card>
@@ -610,22 +576,6 @@ function RestaurantMenuContent() {
         total={calculateTotal()}
         selectedTable={selectedTable}
       />
-
-      {/* Payment Confirmation */}
-      {showConfirmation && (
-        <PaymentConfirmation orderId={orderId} onViewReceipt={viewReceipt} selectedTable={selectedTable} />
-      )}
-
-      {/* Receipt Modal */}
-      {showReceipt && (
-        <ReceiptModal
-          orderId={orderId}
-          items={orderItems}
-          total={calculateTotal()}
-          onClose={closeReceipt}
-          selectedTable={selectedTable}
-        />
-      )}
 
       {/* Reservation Confirmation */}
       {showReservationConfirmation && currentReservation && (

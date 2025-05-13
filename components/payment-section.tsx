@@ -17,46 +17,42 @@ export default function PaymentSection({ onPayment, total }: PaymentSectionProps
   const [activeMethod, setActiveMethod] = useState("card")
 
   return (
-    <div className="px-4 md:px-8 pb-8 animate-in fade-in slide-in-from-bottom-5 duration-300">
-      <h3 className="text-center text-2xl md:text-3xl font-display text-[#FFD700] mb-6 relative inline-block left-1/2 -translate-x-1/2 px-8">
-        {t("paymentMethod")}
-      </h3>
-
-      <div className="grid grid-cols-3 gap-4 mb-6">
+    <div className="animate-in fade-in slide-in-from-bottom-5 duration-300">
+      <div className="grid grid-cols-3 gap-3 mb-6">
         <div
-          className={`p-4 border-2 rounded-lg text-center cursor-pointer transition-all ${
+          className={`p-3 border rounded-lg text-center cursor-pointer transition-all ${
             activeMethod === "mpesa"
               ? "border-[#FFD700] bg-[rgba(255,20,147,0.2)]"
               : "border-[#FF1493] hover:bg-[rgba(255,20,147,0.1)]"
           }`}
           onClick={() => setActiveMethod("mpesa")}
         >
-          <Smartphone className="w-8 h-8 mx-auto mb-2 text-[#FF1493]" />
-          <div>Mpesa</div>
+          <Smartphone className="w-5 h-5 mx-auto mb-1 text-[#FF1493]" />
+          <div className="text-sm">Mpesa</div>
         </div>
 
         <div
-          className={`p-4 border-2 rounded-lg text-center cursor-pointer transition-all ${
+          className={`p-3 border rounded-lg text-center cursor-pointer transition-all ${
             activeMethod === "emola"
               ? "border-[#FFD700] bg-[rgba(255,20,147,0.2)]"
               : "border-[#FF1493] hover:bg-[rgba(255,20,147,0.1)]"
           }`}
           onClick={() => setActiveMethod("emola")}
         >
-          <Wallet className="w-8 h-8 mx-auto mb-2 text-[#FF1493]" />
-          <div>Emola</div>
+          <Wallet className="w-5 h-5 mx-auto mb-1 text-[#FF1493]" />
+          <div className="text-sm">Emola</div>
         </div>
 
         <div
-          className={`p-4 border-2 rounded-lg text-center cursor-pointer transition-all ${
+          className={`p-3 border rounded-lg text-center cursor-pointer transition-all ${
             activeMethod === "card"
               ? "border-[#FFD700] bg-[rgba(255,20,147,0.2)]"
               : "border-[#FF1493] hover:bg-[rgba(255,20,147,0.1)]"
           }`}
           onClick={() => setActiveMethod("card")}
         >
-          <CreditCard className="w-8 h-8 mx-auto mb-2 text-[#FF1493]" />
-          <div>Card</div>
+          <CreditCard className="w-5 h-5 mx-auto mb-1 text-[#FF1493]" />
+          <div className="text-sm">Card</div>
         </div>
       </div>
 

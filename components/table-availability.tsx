@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
-import { Calendar, Check } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Calendar, Check, Table2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ReservationForm from "./reservation-form"
 import { useLanguage } from "./language-context"
+import { motion } from "framer-motion"
 
 interface TableAvailabilityProps {
   onSelectTable: (tableId: string) => void
@@ -37,9 +38,18 @@ export default function TableAvailability({ onSelectTable, selectedTable, onRese
   const [showTables, setShowTables] = useState(false)
   const [activeTab, setActiveTab] = useState("dine-in")
   const [showReservationForm, setShowReservationForm] = useState(false)
+  const [isButtonPulsing, setIsButtonPulsing] = useState(true)
 
   const availableTablesCount = tables.filter((table) => table.status === "available").length
   const totalTables = tables.length
+
+  // Stop pulsing animation after a few seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsButtonPulsing(false)
+    }, 5000)
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleReserveClick = () => {
     if (selectedTable) {
@@ -53,18 +63,50 @@ export default function TableAvailability({ onSelectTable, selectedTable, onRese
 
   return (
     <div className="mb-8">
-      <Button
-        variant="outline"
-        onClick={() => setShowTables(!showTables)}
-        className="mb-4 border-2 border-[#FF1493] text-[#FF1493] hover:bg-[#DB7093] hover:text-white rounded-full"
-      >
-        {showTables ? t("hideTables") : `${t("showTables")} (${availableTablesCount}/${totalTables})`}
-      </Button>
+      <div className="relative py-6 px-4 bg-gradient-to-r from-[rgba(255,20,147,0.1)] via-transparent to-[rgba(255,20,147,0.1)] rounded-xl border-2 border-dashed border-[#FF1493] mb-8">
+        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#FFD700] text-[#5E3A4D] px-4 py-1 rounded-full font-bold text-sm">
+          {t("tableAvailability")}
+        </div>
+
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex items-center justify-center mb-4 text-center">
+            <Table2 className="h-6 w-6 mr-2 text-[#FF1493]" />
+            <span className="text-lg font-semibold">
+              {availableTablesCount}/{totalTables} {t("available")}
+            </span>
+          </div>
+
+          <motion.div
+            animate={isButtonPulsing ? { scale: [1, 1.05, 1] } : {}}
+            transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
+          >
+            <Button
+              size="lg"
+              onClick={() => setShowTables(!showTables)}
+              className={`text-lg px-8 py-6 h-auto shadow-lg ${
+                showTables
+                  ? "bg-[#DB7093] hover:bg-[#FF1493] text-white"
+                  : "bg-gradient-to-r from-[#FF1493] to-[#DB7093] hover:from-[#DB7093] hover:to-[#FF1493] text-white"
+              } rounded-full transition-all duration-300 transform hover:scale-105`}
+            >
+              {showTables ? (
+                t("hideTables")
+              ) : (
+                <>
+                  <span className="mr-2">👀</span> {t("showTables")}
+                </>
+              )}
+            </Button>
+          </motion.div>
+        </div>
+      </div>
 
       {showTables && (
-        <Card className="border-2 border-[#FF1493]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-[#FFD700] text-xl">{t("tableAvailability")}</CardTitle>
+        <Card className="border-2 border-[#FF1493] shadow-lg animate-in fade-in-50 slide-in-from-top-5 duration-300">
+          <CardHeader className="pb-2 bg-gradient-to-r from-[rgba(255,20,147,0.2)] to-transparent">
+            <CardTitle className="text-[#FFD700] text-xl flex items-center">
+              <Table2 className="h-5 w-5 mr-2" /> {t("tableAvailability")}
+            </CardTitle>
             <CardDescription>{t("selectTable")}</CardDescription>
           </CardHeader>
           <CardContent>

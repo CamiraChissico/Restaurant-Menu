@@ -79,6 +79,8 @@ export const translations = {
     mpesaPrompt: "You will receive an Mpesa prompt on your phone to complete payment.",
     emolaRedirect: "You will be redirected to Emola to complete your payment.",
     transferNumber: "Transfer to number:",
+    returnToMenu: "Return to Menu",
+    orderDetails: "Order Details",
 
     // Payment confirmation
     paymentSuccessful: "Payment Successful!",
@@ -189,6 +191,8 @@ export const translations = {
     mpesaPrompt: "Você receberá uma solicitação Mpesa no seu telefone para concluir o pagamento.",
     emolaRedirect: "Você será redirecionado para o Emola para concluir seu pagamento.",
     transferNumber: "Número para transferência:",
+    returnToMenu: "Voltar ao Menu",
+    orderDetails: "Detalhes do Pedido",
 
     // Payment confirmation
     paymentSuccessful: "Pagamento Bem-sucedido!",
