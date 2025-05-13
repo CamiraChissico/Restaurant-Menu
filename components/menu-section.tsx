@@ -1,6 +1,7 @@
 "use client"
 
-import { Clock, Truck } from "lucide-react"
+import { useState } from "react"
+import { Clock, Truck, ImageOff } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "./language-context"
 import Image from "next/image"
@@ -27,8 +28,16 @@ interface MenuSectionProps {
 
 export default function MenuSection({ title, items, isActive, onAddToCart }: MenuSectionProps) {
   const { language } = useLanguage()
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
 
   if (!isActive) return null
+
+  const handleImageError = (itemName: string) => {
+    setImageErrors((prev) => ({
+      ...prev,
+      [itemName]: true,
+    }))
+  }
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-5 duration-300">
@@ -42,14 +51,26 @@ export default function MenuSection({ title, items, isActive, onAddToCart }: Men
             key={index}
             className="bg-white/10 rounded-lg overflow-hidden shadow-md border border-[#FF1493]/30 transition-all hover:shadow-lg hover:scale-[1.02]"
           >
-            <div className="relative h-48 w-full overflow-hidden">
-              <Image
-                src={item.image || "/placeholder.svg?height=300&width=500"}
-                alt={language === "PT" ? item.namePT : item.nameEN}
-                width={500}
-                height={300}
-                className="w-full h-full object-cover transition-transform hover:scale-110 duration-500"
-              />
+            <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+              {imageErrors[item.nameEN] ? (
+                <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                  <div className="text-center">
+                    <ImageOff className="h-10 w-10 mx-auto text-gray-400 mb-2" />
+                    <span className="text-lg font-bold">{item.emoji}</span>
+                  </div>
+                </div>
+              ) : (
+                <Image
+                  src={item.image || "/placeholder.svg?height=300&width=500"}
+                  alt={language === "PT" ? item.namePT : item.nameEN}
+                  width={500}
+                  height={300}
+                  className="w-full h-full object-cover transition-transform hover:scale-110 duration-500"
+                  onError={() => handleImageError(item.nameEN)}
+                  unoptimized={true}
+                  priority={index < 4}
+                />
+              )}
               <div className="absolute top-2 right-2 bg-[#FF1493] text-white px-3 py-1 rounded-full text-sm font-bold">
                 {item.price} MZN
               </div>
@@ -57,7 +78,7 @@ export default function MenuSection({ title, items, isActive, onAddToCart }: Men
 
             <div className="p-4">
               <h4 className="font-display text-xl font-bold text-[#FFD700] mb-2">
-                {language === "PT" ? item.namePT : item.nameEN}
+                {language === "PT" ? item.namePT : item.nameEN} <span className="ml-1">{item.emoji}</span>
               </h4>
 
               <div className="text-sm mb-3 min-h-[60px]">

@@ -35,7 +35,7 @@ const menuData = {
       nameEN: "Peri-Peri Chicken Livers",
       namePT: "Fígados de Frango Peri-Peri",
       emoji: "🍗",
-      image: "https://images.unsplash.com/photo-1600891964599-f61f4298bdbc?q=80&w=1000&auto=format&fit=crop",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-crRFNRak7UjRuEn0i851Ilx883zCcO.png",
       price: 380,
       descriptionEN:
         "Spicy chicken livers cooked in a traditional Mozambican peri-peri sauce, served with crusty bread.",
@@ -223,10 +223,11 @@ const menuData = {
       nameEN: "Coconut Water",
       namePT: "Água de Coco",
       emoji: "🥥",
-      image: "https://images.unsplash.com/photo-1536057222397-b596ae6c5bcf?q=80&w=1000&auto=format&fit=crop",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Zwp5hNfhDk7DspaQJ0AEn2RRhK4UMJ.png",
       price: 180,
-      descriptionEN: "Fresh coconut water served in the shell, perfect for a refreshing tropical experience.",
-      descriptionPT: "Água de coco fresca servida na casca, perfeita para uma experiência tropical refrescante.",
+      descriptionEN: "Fresh coconut water served with ice and lime, perfect for a refreshing tropical experience.",
+      descriptionPT:
+        "Água de coco fresca servida com gelo e limão, perfeita para uma experiência tropical refrescante.",
       prepTime: 5,
     },
     {
